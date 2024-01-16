@@ -57,38 +57,6 @@ resource "local_file" "docker_compose" {
   EOT
 }
 
-resource "local_file" "xxo" {
-  filename = "/tmp/xxo"
-  content  = "ok"
-}
-
-resource "null_resource" "copy-test-file" {
-  depends_on = [local_file.xxo]
-
-  triggers = {
-    when_value_changed : local_file.xxo.content_md5
-    abc : local_file.xxo.filename
-  }
-
-  connection {
-    type     = "ssh"
-    user     = "root"
-    host     = "192.168.1.8"
-    port     = 2222
-    password = "root"
-  }
-
-  provisioner "file" {
-    source      = local_file.xxo.filename
-    destination = local_file.xxo.filename
-  }
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = "echo we should remove ${self.triggers.abc}"
-  }
-}
-
 resource "local_file" "deployment_script" {
   content  = <<-EOT
     #!/usr/bin/env bash
