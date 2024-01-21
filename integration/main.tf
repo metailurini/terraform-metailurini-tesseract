@@ -1,10 +1,12 @@
+locals {
+  postgres_password = "secret"
+}
+
 module "postgres" {
   source = "../modules/apps/postgres"
 
-  name = "postgres"
-  environment = {
-    POSTGRES_PASSWORD : "password"
-  }
+  name          = "postgres"
+  init_password = local.postgres_password
   ports = [
     {
       host_port : 5432,
@@ -22,6 +24,10 @@ module "cluster" {
 
 module "grafana" {
   source = "../modules/grafana"
+  enable_dashboard_postgres_exporter = {
+    enabled = true
+    dsn     = "postgresql://postgres:${local.postgres_password}@host.docker.internal:5432/postgres"
+  }
 }
 
 module "build" {

@@ -22,3 +22,19 @@ variable "enable_dashboard_node_exporter" {
   description = "Enable the full node exporter dashboard"
 }
 
+variable "enable_dashboard_postgres_exporter" {
+  type = object({
+    enabled = bool
+    dsn     = string
+  })
+  default = {
+    enabled = true
+    dsn     = ""
+  }
+  description = "Enable the full postgres exporter dashboard"
+  validation {
+    condition     = var.enable_dashboard_postgres_exporter.enabled == true && length(var.enable_dashboard_postgres_exporter.dsn) > 0
+    error_message = "Postgres exporter dashboard enabled but no DSN provided, please provide a DSN or disable the dashboard"
+  }
+}
+

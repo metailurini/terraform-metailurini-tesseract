@@ -17,7 +17,7 @@ cd ..
 status=0
 apps=$(grep -rion 'image .*= *"[^"]*' | sed 's/.*"//g')
 ps_logs=$(docker ps -a | grep 'Up')
-position_status="50"
+position_status="65"
 success="\e[${position_status}G\e[42;30m[✔]\e[0m"
 failure="\e[${position_status}G\e[41m\e[30m[✘]\e[0m"
 for app in $apps; do

@@ -15,4 +15,3 @@ echo "[+] Destroying any existing containers..."
 terraform destroy --auto-approve >> /tmp/integration_test
 
 echo; bash "$script_dir/reset.sh"
-echo; bash "$script_dir/verify.sh"

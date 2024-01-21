@@ -7,8 +7,9 @@ output "utils_services" {
 
 output "grafana_services" {
   value = {
-    grafana       = module.grafana.data,
-    prometheus    = module.prometheus.data,
-    node_exporter = module.node_exporter.data,
+    grafana           = module.grafana.data,
+    prometheus        = module.prometheus.data,
+    node_exporter     = module.node_exporter.data,
+    postgres_exporter = module.postgres_exporter.data,
   }
 }
