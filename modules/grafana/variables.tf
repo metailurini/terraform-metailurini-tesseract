@@ -1,9 +1,3 @@
-variable "org_name" {
-  type        = string
-  default     = "grafana"
-  description = "Name of the Grafana organization"
-}
-
 variable "admin_user" {
   type        = string
   default     = "admin"

@@ -14,10 +14,6 @@ locals {
   grafana_exposed_port = 3000
 }
 
-resource "grafana_organization" "org" {
-  name = var.org_name
-}
-
 module "grafana" {
   source = "../apps/scroach"
   image  = "grafana/grafana:9.4.3"

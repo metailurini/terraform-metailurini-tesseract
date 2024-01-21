@@ -89,23 +89,19 @@ module "prometheus" {
 }
 
 resource "grafana_data_source" "prometheus" {
-  type   = "prometheus"
-  name   = "prometheus"
-  org_id = grafana_organization.org.id
-  url    = "http://host.docker.internal:${local.exposed_port.prometheus}"
+  type = "prometheus"
+  name = "prometheus"
+  url  = "http://host.docker.internal:${local.exposed_port.prometheus}"
 }
 
 resource "grafana_folder" "system_metrics" {
-  depends_on = [grafana_organization.org]
-  title      = "System Metrics"
-  org_id     = grafana_organization.org.id
+  title = "System Metrics"
 }
 
 resource "grafana_dashboard" "node_exporter_full" {
   count       = var.enable_dashboard_node_exporter ? 1 : 0
   depends_on  = [grafana_folder.system_metrics, grafana_data_source.prometheus]
   folder      = grafana_folder.system_metrics.id
-  org_id      = grafana_folder.system_metrics.org_id
   config_json = file("${path.module}/dashboards/node-exporter-full.json")
 }
 
@@ -113,7 +109,6 @@ resource "grafana_dashboard" "postgres_exporter_full" {
   count       = var.enable_dashboard_postgres_exporter.enabled ? 1 : 0
   depends_on  = [grafana_folder.system_metrics, grafana_data_source.prometheus]
   folder      = grafana_folder.system_metrics.id
-  org_id      = grafana_folder.system_metrics.org_id
   config_json = file("${path.module}/dashboards/postgres-overview.json")
 }
 
