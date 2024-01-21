@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/metailurini/terraform-metailurini-tesseract/compare/v1.1.0...v1.1.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* remove org definition, because it's buggy ([43e63e0](https://github.com/metailurini/terraform-metailurini-tesseract/commit/43e63e0e5a1bf3748e287158529e183531164fca))
+
 ## [1.1.0](https://github.com/metailurini/terraform-metailurini-tesseract/compare/v1.0.1...v1.1.0) (2024-01-21)
 
 
